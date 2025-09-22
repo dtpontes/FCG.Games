@@ -1,0 +1,38 @@
+services:
+  games-service:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_URLS=http://+:5001
+      - ConnectionStrings__DefaultConnection=Server=sqlserver,1433;Database=fcg-games;User Id=SA;Password=${SA_PASSWORD};TrustServerCertificate=True;
+    restart: always
+    deploy:
+      replicas: 2
+      resources:
+        limits:
+          memory: 512M
+          cpus: '0.5'
+        reservations:
+          memory: 256M
+          cpus: '0.25'
+    healthcheck:
+      test: curl --fail http://localhost:5001/health || exit 1
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+
+  sqlserver:
+    environment:
+      - MSSQL_PID=Standard
+      - SA_PASSWORD=${SA_PASSWORD}
+    deploy:
+      resources:
+        limits:
+          memory: 2G
+          cpus: '1.0'
+        reservations:
+          memory: 1G
+          cpus: '0.5'
+    restart: always
+    # Don't expose SQL Server port in production for security
+    ports: []

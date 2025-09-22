@@ -1,0 +1,28 @@
+services:
+  fcg.games.presentation:
+    image: ${DOCKER_REGISTRY-}fcggamespresentation
+    build:
+      context: .
+      dockerfile: src/FCG.Games.Presentation/Dockerfile
+    ports:
+      - "5000:5000"
+      - "5001:5001"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Server=db;Database=FCGGamesDatabase;User=sa;Password=YourStrongPassword123;TrustServerCertificate=True;
+    depends_on:
+      - db
+
+  db:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: sqlserver
+    ports:
+      - "1433:1433" # Map container port 1433 to host port 1433
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_sa_PASSWORD=YourStrongPassword123
+    volumes:
+      - sqlserverdata:/var/opt/mssql
+
+volumes:
+  sqlserverdata:

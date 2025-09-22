@@ -1,0 +1,18 @@
+# .env file - contains sensitive information
+.env
+
+# Docker volumes
+fcg_games_sqlserver_data/
+
+# Docker Compose override for local development
+docker-compose.override.yml
+
+# IDE and OS files
+.vs/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log

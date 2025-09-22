@@ -43,7 +43,7 @@ namespace FCG.Games.Presentation.Controllers
         /// </summary>
         /// <param name="id">ID do jogo</param>
         /// <returns>Dados do jogo ou erro</returns>
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(GameResponseDto), 200)]
         [ProducesResponseType(404)]
@@ -58,14 +58,21 @@ namespace FCG.Games.Presentation.Controllers
         /// Obtém todos os jogos.
         /// </summary>
         /// <returns>Lista de jogos</returns>
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [HttpGet("all")]
         [ProducesResponseType(typeof(IEnumerable<GameResponseDto>), 200)]
         public async Task<IActionResult> GetAllGames()
         {
-            var games = await _gameService.GetAllGamesAsync();
-
-            return Response(games);
+            try
+            {
+                var games = await _gameService.GetAllGamesAsync();
+                return Response(games);
+            }
+            catch (Exception ex)
+            {
+                // Log the exception if you have logging configured
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
         }
 
         /// <summary>

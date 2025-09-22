@@ -8,7 +8,12 @@
             {
                 var xmlFile = $"{typeof(Program).Assembly.GetName().Name}.xml";
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-                c.IncludeXmlComments(xmlPath);
+                
+                // Only include XML comments if the file exists
+                if (File.Exists(xmlPath))
+                {
+                    c.IncludeXmlComments(xmlPath);
+                }
             });
             return services;
         }
