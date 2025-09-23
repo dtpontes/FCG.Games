@@ -58,7 +58,7 @@ namespace FCG.Games.Presentation.Controllers
         /// Obtém todos os jogos.
         /// </summary>
         /// <returns>Lista de jogos</returns>
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         [HttpGet("all")]
         [ProducesResponseType(typeof(IEnumerable<GameResponseDto>), 200)]
         public async Task<IActionResult> GetAllGames()

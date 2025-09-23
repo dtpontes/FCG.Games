@@ -9,15 +9,15 @@ services:
       - "5001:5001"
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ConnectionStrings__DefaultConnection=Server=db;Database=FCGGamesDatabase;User=sa;Password=YourStrongPassword123;TrustServerCertificate=True;
+      - ConnectionStrings__DefaultConnection=Server=db_games;Database=FCGGamesDatabase;User=sa;Password=YourStrongPassword123;TrustServerCertificate=True;
     depends_on:
-      - db
+      - db_games
 
-  db:
+  db_games:
     image: mcr.microsoft.com/mssql/server:2022-latest
-    container_name: sqlserver
+    container_name: fcg-games-sqlserver
     ports:
-      - "1433:1433" # Map container port 1433 to host port 1433
+      - "1434:1433" # Map container port 1434 to host port 1434
     environment:
       - ACCEPT_EULA=Y
       - MSSQL_sa_PASSWORD=YourStrongPassword123
