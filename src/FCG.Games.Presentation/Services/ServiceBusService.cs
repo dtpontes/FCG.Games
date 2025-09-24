@@ -39,17 +39,17 @@ namespace FCG.Games.Presentation.Services
     {
         private readonly ServiceBusClient _client;
         private readonly ServiceBusProcessor _processor;
-        private readonly ISaleProcessingService _saleProcessingService;
+        private readonly IServiceProvider _serviceProvider;
         private readonly ILogger<ServiceBusService> _logger;
         private readonly ServiceBusSettings _settings;
 
         public ServiceBusService(
             IOptions<ServiceBusSettings> settings,
-            ISaleProcessingService saleProcessingService,
+            IServiceProvider serviceProvider,
             ILogger<ServiceBusService> logger)
         {
             _settings = settings.Value;
-            _saleProcessingService = saleProcessingService;
+            _serviceProvider = serviceProvider;
             _logger = logger;
 
             _client = new ServiceBusClient(_settings.ConnectionString);
@@ -91,6 +91,10 @@ namespace FCG.Games.Presentation.Services
             var messageId = args.Message.MessageId;
             var correlationId = args.Message.CorrelationId;
 
+            // Create a scope for each message to resolve scoped dependencies
+            using var scope = _serviceProvider.CreateScope();
+            var saleProcessingService = scope.ServiceProvider.GetRequiredService<ISaleProcessingService>();
+
             try
             {
                 _logger.LogInformation("Processando mensagem. MessageId: {MessageId}, CorrelationId: {CorrelationId}", 
@@ -117,7 +121,7 @@ namespace FCG.Games.Presentation.Services
                 }
 
                 // Processar a venda
-                var result = await _saleProcessingService.ProcessSaleAsync(saleMessage);
+                var result = await saleProcessingService.ProcessSaleAsync(saleMessage);
 
                 if (result.IsSuccess)
                 {

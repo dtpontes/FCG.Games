@@ -52,6 +52,11 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
+// --- SEÇÃO DE INICIALIZAÇÃO DO BANCO DE DADOS ---
+// Executa as tarefas de inicialização do banco de dados de forma assíncrona
+// antes de configurar o pipeline de requisições.
+await InitializeDatabaseAsync(app);
+
 // Configurar o pipeline de requisições HTTP.
 if (app.Environment.IsDevelopment())
 {
@@ -76,17 +81,12 @@ app.UseMiddleware<SerilogRequestLoggingMiddleware>();
 app.UseAuthentication();
 app.UseAuthorization();
 
-// Controllers and GraphQL
-app.MapControllers();
+// GraphQL middleware
 app.UseGraphQL();
 
-// Health Check Endpoint
+// Map endpoints
+app.MapControllers();
 app.MapHealthChecks("/health");
-
-// --- SEÇÃO CORRIGIDA ---
-// Executa as tarefas de inicialização do banco de dados de forma assíncrona
-// antes de iniciar o servidor web.
-await InitializeDatabaseAsync(app);
 
 // Log microservice startup information
 var logger = app.Services.GetRequiredService<ILogger<Program>>();
@@ -94,6 +94,7 @@ logger.LogInformation("FCG Games Microservice started successfully");
 logger.LogInformation("Microservice is listening on the configured URLs");
 logger.LogInformation("Health check endpoint: /health");
 logger.LogInformation("Swagger UI: /swagger");
+logger.LogInformation("GraphQL endpoint: /graphql");
 logger.LogInformation("Service Bus processing enabled for sales queue");
 
 // Inicia a aplicação para escutar por requisições

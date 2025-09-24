@@ -37,9 +37,9 @@ namespace FCG.Games.Presentation.Controllers.GraphQL
         /// Consulta para recuperar um jogo pelo ID.
         /// </summary>
         /// <param name="id">ID do jogo.</param>
-        /// <returns>Os detalhes do jogo correspondente ao ID.</returns>
+        /// <returns>Os detalhes do jogo correspondente ao ID ou null se não encontrado.</returns>
         [QueryRoot("game")]
-        public async Task<GameResponseDto> RetrieveById(long id)
+        public async Task<GameResponseDto?> RetrieveById(long id)
         {
             var game = await _gameService.GetGameByIdAsync(id);
 
