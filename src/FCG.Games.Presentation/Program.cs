@@ -30,6 +30,9 @@ builder.Services.AddAuthorization();
 // Application Services
 builder.Services.AddAppServices();
 
+// Service Bus Services
+builder.Services.AddServiceBusServices(builder.Configuration);
+
 // Health Checks for Microservice
 builder.Services.AddHealthChecks(builder.Configuration);
 
@@ -91,6 +94,7 @@ logger.LogInformation("FCG Games Microservice started successfully");
 logger.LogInformation("Microservice is listening on the configured URLs");
 logger.LogInformation("Health check endpoint: /health");
 logger.LogInformation("Swagger UI: /swagger");
+logger.LogInformation("Service Bus processing enabled for sales queue");
 
 // Inicia a aplicação para escutar por requisições
 await app.RunAsync();
