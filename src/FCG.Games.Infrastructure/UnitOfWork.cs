@@ -8,7 +8,7 @@ namespace FCG.Games.Infrastructure
     {
         private readonly AppDbContext _context;        
         private IRepository<Game>? _games;
-        // Add other repositories as needed
+        private IRepository<Stock>? _stocks;
 
         public UnitOfWork(AppDbContext context)
         {
@@ -16,6 +16,7 @@ namespace FCG.Games.Infrastructure
         }        
 
         public IRepository<Game> Games => _games ??= new Repository<Game>(_context);
+        public IRepository<Stock> Stocks => _stocks ??= new Repository<Stock>(_context);
 
         public async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
