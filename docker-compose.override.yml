@@ -4,6 +4,12 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_HTTP_PORTS=5000
       - ASPNETCORE_HTTPS_PORTS=5001
+      - ServiceBus__ConnectionString=${SERVICEBUS_CONNECTION_STRING}
+      - ServiceBus__SalesQueueName=sale-processing-queue
+      - ServiceBus__MaxConcurrentCalls=3
+      - ServiceBus__MessageTimeoutSeconds=180
+      - Logging__LogLevel__Azure.Messaging.ServiceBus=Debug
+      - Logging__LogLevel__FCG.Games.Service.SaleProcessingService=Debug
     ports:
       - "5000:5000"
       - "5001:5001"
