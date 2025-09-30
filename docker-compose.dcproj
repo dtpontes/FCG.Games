@@ -20,6 +20,7 @@
     <None Include="fix-servicebus.ps1" />
     <None Include="quick-test.ps1" />
     <None Include="run-docker.ps1" />
+    <None Include="SECURITY_SETUP.md" />
     <None Include="SERVICEBUS_SETUP.md" />
     <None Include="SUCCESS_SUMMARY.md" />
     <None Include="test-direct-config.ps1" />
