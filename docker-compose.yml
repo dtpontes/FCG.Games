@@ -10,7 +10,7 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ConnectionStrings__DefaultConnection=Server=db_games;Database=FCGGamesDatabase;User=sa;Password=YourStrongPassword123;TrustServerCertificate=True;
-      - ServiceBus__ConnectionString=${SERVICEBUS_CONNECTION_STRING}
+      - ServiceBus__ConnectionString=Endpoint=sb://fcg-games-servicebus.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=83uilbws19wJIBUXcNOqNaDylJ9oFiDEv+ASbHpvwmc=
       - ServiceBus__SalesQueueName=sale-processing-queue
       - ServiceBus__MaxConcurrentCalls=5
       - ServiceBus__MessageTimeoutSeconds=300

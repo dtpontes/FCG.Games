@@ -8,7 +8,6 @@
   </PropertyGroup>
   <ItemGroup>
     <None Include=".env.example" />
-    <None Include="AZURE_SERVICE_BUS_SALES_PROCESSING.md" />
     <None Include="diagnose-deadletter.ps1" />
     <None Include="docker-compose.override.yml">
       <DependentUpon>docker-compose.yml</DependentUpon>
