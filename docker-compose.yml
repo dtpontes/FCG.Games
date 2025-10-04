@@ -1,6 +1,6 @@
 services:
   fcg.games.presentation:
-    image: ${DOCKER_REGISTRY-}${DOCKER_USERNAME-dtpontes}/fcggamespresentation:${IMAGE_TAG-latest}
+    image: dtpontes/fcggamespresentation:latest
     build:
       context: .
       dockerfile: src/FCG.Games.Presentation/Dockerfile
