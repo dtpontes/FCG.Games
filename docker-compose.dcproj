@@ -7,25 +7,10 @@
     <ProjectGuid>81dded9d-158b-e303-5f62-77a2896d2a5a</ProjectGuid>
   </PropertyGroup>
   <ItemGroup>
-    <None Include=".env.example" />
-    <None Include="diagnose-deadletter.ps1" />
     <None Include="docker-compose.override.yml">
       <DependentUpon>docker-compose.yml</DependentUpon>
     </None>
     <None Include="docker-compose.yml" />
     <None Include=".dockerignore" />
-    <None Include="DOCKER_SERVICEBUS_SETUP.md" />
-    <None Include="ERROR_FIXES_SUMMARY.md" />
-    <None Include="fix-servicebus.ps1" />
-    <None Include="quick-test.ps1" />
-    <None Include="run-docker.ps1" />
-    <None Include="SECURITY_SETUP.md" />
-    <None Include="SERVICEBUS_SETUP.md" />
-    <None Include="SUCCESS_SUMMARY.md" />
-    <None Include="test-direct-config.ps1" />
-    <None Include="test-endpoint.ps1" />
-    <None Include="test-servicebus.ps1" />
-    <None Include="test-servicebus.sh" />
-    <None Include="USER_SECRETS_SETUP.md" />
   </ItemGroup>
 </Project>
