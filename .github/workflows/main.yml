@@ -24,7 +24,7 @@ jobs:
         run: dotnet restore ./FCG.Games.sln
 
       - name: Build solution
-        run: dotnet build ./FCG.sln --configuration Release --no-restore       
+        run: dotnet build ./FCG.Games.sln --configuration Release --no-restore       
 
   docker-build-and-push:
     runs-on: ubuntu-latest
