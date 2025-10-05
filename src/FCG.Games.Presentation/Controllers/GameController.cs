@@ -27,7 +27,7 @@ namespace FCG.Games.Presentation.Controllers
         /// </summary>
         /// <param name="gameRequestDto">Dados do jogo</param>
         /// <returns>Jogo criado ou erros de validação</returns>
-        //[Authorize(Roles = "Admin")]
+        [AllowAnonymous]
         [HttpPost("register")]
         [ProducesResponseType(typeof(GameResponseDto), 200)]
         [ProducesResponseType(400)]
@@ -43,7 +43,7 @@ namespace FCG.Games.Presentation.Controllers
         /// </summary>
         /// <param name="id">ID do jogo</param>
         /// <returns>Dados do jogo ou erro</returns>
-        //[Authorize(Roles = "Admin")]
+        [AllowAnonymous]
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(GameResponseDto), 200)]
         [ProducesResponseType(404)]
@@ -58,7 +58,7 @@ namespace FCG.Games.Presentation.Controllers
         /// Obtém todos os jogos.
         /// </summary>
         /// <returns>Lista de jogos</returns>
-        //[Authorize(Roles = "Admin")]
+        [AllowAnonymous]
         [HttpGet("all")]
         [ProducesResponseType(typeof(IEnumerable<GameResponseDto>), 200)]
         public async Task<IActionResult> GetAllGames()
